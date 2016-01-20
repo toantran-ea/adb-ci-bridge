@@ -8,7 +8,10 @@ class ScreenshotHandler(BaseHTTPRequestHandler):
 	def do_POST(self):
 		file_name = self.headers.getheader('filename', 'screenshot')
 		self.screenshot(file_name)
-		return self.dump_screenshot_response(file_name)
+		self.send_response(200)
+  		self.send_header("Content-type", "application/json ")
+  		self.end_headers()
+		self.wfile.write(self.dump_screenshot_response(file_name))
 		
 	def do_GET(self):
 		print "GET operation not supported!"
@@ -22,8 +25,3 @@ class ScreenshotHandler(BaseHTTPRequestHandler):
 server = HTTPServer(('', PORT), ScreenshotHandler)
 print "Android CI Bridge serving at port: ", PORT
 server.serve_forever()
-
-# if __name__ == "__main__":
-# 	current_dir = os.path.dirname(os.path.realpath(__file__))
-# 	screenshot_file = os.path.join(current_dir, 'screenshot.sh')
-# 	call([screenshot_file + " lalalal"], shell=True)

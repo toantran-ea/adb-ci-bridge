@@ -5,4 +5,6 @@ nohup python -m simple_server.py 9000 &
 
 cd ~/
 
-echo Bridge server with pid  + $(pgrep python)
+echo Bridge server with pid $(pgrep python)
+
+export CI_BRIDGE_READY=1
