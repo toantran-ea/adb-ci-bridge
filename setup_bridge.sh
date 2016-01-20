@@ -4,3 +4,5 @@ mkdir -p $ANDROID_SCREENSHOT
 nohup python -m simple_server.py 9000 &
 
 cd ~/
+
+echo Bridge server with pid  + $(pgrep python)
