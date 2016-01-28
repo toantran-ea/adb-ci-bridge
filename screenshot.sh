@@ -8,7 +8,7 @@ adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $ANDROID_SCREENSHOT/$NAM
 
 mkdir -p $ANDROID_SCREENSHOT/$TAG
 
-if [[ ! -z $TRACE ]]
+if [[ ! -z "$TRACE" ]]
 	then echo $TRACE >> $ANDROID_SCREENSHOT/$TAG/trace$SPLITTER$NOW.txt
 fi
 
