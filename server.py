@@ -25,9 +25,10 @@ class ScreenshotHandler(BaseHTTPRequestHandler):
 			print data
 			tag = data.get(PARAM_TAG, "defaulttag")
 			trace = data.get(PARAM_TRACE, "")
-			print "tag ", tag
-			print "trace ", trace
-			self.screenshot(tag, trace)
+			print "--> tag ", tag
+			print "--> trace ", trace
+			self.screenshot(tag)
+			self.dump_trace_file(tag, trace)
 
 		self.write_header_response_200()
 	def do_GET(self):
@@ -42,11 +43,16 @@ class ScreenshotHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 		self.end_headers()
 
-	def screenshot(self, tag, trace):
-		call(["./screenshot.sh "+ tag + " \"" + trace + "\""], shell=True)
+	def screenshot(self, tag):
+		call(["./screenshot.sh "+ tag], shell=True)
 
 	def unlock(self):
 		call(["./unlock.sh"], shell=True)
+
+	def dump_trace_file(self, tag_dir, trace):
+		# Assume that the directory of tag_dir has been created in screenshot step
+		with open(os.path.join(os.environ['ANDROID_SCREENSHOT'], tag_dir, "trace.txt"), "w") as trace_file:
+			trace_file.write(trace)
 
 server = HTTPServer(('', PORT), ScreenshotHandler)
 print "Android CI Bridge serving at port: ", PORT
