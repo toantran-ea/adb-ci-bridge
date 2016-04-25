@@ -21,7 +21,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-export ANDROID_SCREENSHOT="screenshots"
+if [ -z "$ANDROID_SCREENSHOT" ]; then
+    echo "Need to set ANDROID_SCREENSHOT"
+    exit 1
+fi  
 
 killall -9 python
 

@@ -1,4 +1,7 @@
-: "${ANDROID_SCREENSHOT?Need to set ANDROID_SCREENSHOT}"
+if [ -z "$ANDROID_SCREENSHOT" ]; then
+    echo "Need to set ANDROID_SCREENSHOT"
+    exit 1
+fi  
 
 TAG=$1
 TRACE=$2
