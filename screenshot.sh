@@ -1,3 +1,5 @@
+: "${ANDROID_SCREENSHOT?Need to set ANDROID_SCREENSHOT}"
+
 TAG=$1
 TRACE=$2
 NOW=$(date +"%m-%d-%Y-%H-%M-%S")

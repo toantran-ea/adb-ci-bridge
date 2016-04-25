@@ -1,3 +1,5 @@
+: "${ANDROID_SCREENSHOT?Need to set ANDROID_SCREENSHOT}"
+
 echo Creating screenshots folder ...
 mkdir -p $ANDROID_SCREENSHOT
 
